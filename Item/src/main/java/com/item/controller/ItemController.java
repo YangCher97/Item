@@ -38,6 +38,9 @@ public class ItemController {
 	public Optional<Item> getItemById(@RequestParam String id) throws NumberFormatException, IllegalArgumentException, Exception {
 		
 		//TODO: to wrap this in Try/Catch
+		for (int i = 0; i< 1000; i++) {
+			itemService.getItem(Integer.parseInt(id));
+		}
 		
 		return itemService.getItem(Integer.parseInt(id));
 	}

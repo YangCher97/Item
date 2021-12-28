@@ -3,10 +3,12 @@ package com.item.persistence;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import com.item.model.Item;
 import com.item.repo.ItemRepo;
 
+@Component
 public class ItemDataService {
 
 	/** The Item Repository to contact CouchDb. */

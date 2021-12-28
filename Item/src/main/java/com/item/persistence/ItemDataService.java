@@ -24,6 +24,15 @@ public class ItemDataService {
 	}
 	
 	/**
+	 * Update the item.
+	 * 
+	 * @param item the item
+	 */
+	public void updateItem(Item item) {
+		itemRepo.save(item);
+	}
+	
+	/**
 	 * Gets an item by id.
 	 * 
 	 * @param id the id

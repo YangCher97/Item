@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -38,9 +39,6 @@ public class ItemController {
 	public Optional<Item> getItemById(@RequestParam String id) throws NumberFormatException, IllegalArgumentException, Exception {
 		
 		//TODO: to wrap this in Try/Catch
-		for (int i = 0; i< 1000; i++) {
-			itemService.getItem(Integer.parseInt(id));
-		}
 		
 		return itemService.getItem(Integer.parseInt(id));
 	}
@@ -64,5 +62,38 @@ public class ItemController {
 		itemService.insertItem(item);
 		
 		return "Item Saved Successfully";
+	}
+	
+	/**
+	 * Updates the Item.
+	 * 
+	 * @param item the item
+	 * 
+	 * @return the response of inserting the item
+	 * 
+	 * @throws IllegalArgumentException the illegal argument exception
+	 * @throws Exception the exception
+	 */
+	@PutMapping
+	@ResponseStatus(HttpStatus.CREATED)
+	public String updateItem(@RequestBody Item item) throws IllegalArgumentException, Exception {
+		
+		//TODO: to wrap this in Try/Catch
+		Optional<Item> couchDbItem = itemService.getItem(item.getId());
+		
+		if (couchDbItem == null) {
+			return "Item does not exist to update.";
+		} else {
+			Item updatedItem = new Item();
+			updatedItem.setId(item.getId());
+			updatedItem.setCategory(item.getCategory());
+			updatedItem.setName(item.getName());
+			updatedItem.setWeight(item.getWeight());
+			
+			itemService.insertItem(updatedItem);
+			
+			return "Item Updated Successfully";
+		}
+		
 	}
 }

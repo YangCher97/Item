@@ -44,6 +44,26 @@ public class ItemService {
 	}
 	
 	/**
+	 * Updates an Item.
+	 * 
+	 * @param item the item
+	 * 
+	 * @throws IllegalArgumentException the Illegal Argument Exception
+	 * @throws Exception the Exception
+	 */
+	public void updateItem(Item item) throws IllegalArgumentException, Exception {
+		try {
+			itemDataService.updateItem(item);
+		} catch (IllegalArgumentException illegalArg) {
+			logger.error("IllegalArgumentException Occured. Exception detail is: {}", illegalArg);
+			throw new IllegalArgumentException(illegalArg);
+		} catch (Exception exception) {
+			logger.error("Exception occurred when trying to update item. Exception detail is: {}", exception);
+			throw new Exception(exception);
+		}
+	}
+	
+	/**
 	 * Get an Item by ID.
 	 * 
 	 * @param id the id
